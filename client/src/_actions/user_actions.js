@@ -11,7 +11,7 @@ import {
 } from './types';
 import { USER_SERVER } from '../components/Config.js';
 
-export function registerUser(dataToSubmit) {
+export const registerUser = (dataToSubmit) => {
     const request = axios.post(`${USER_SERVER}/register`, dataToSubmit)
         .then(response => response.data);
 
@@ -21,7 +21,7 @@ export function registerUser(dataToSubmit) {
     }
 }
 
-export function loginUser(dataToSubmit) {
+export const loginUser = (dataToSubmit) => {
     const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
         .then(response => response.data);
 
@@ -31,7 +31,7 @@ export function loginUser(dataToSubmit) {
     }
 }
 
-export function auth() {
+export const auth = () => {
     const request = axios.get(`${USER_SERVER}/auth`)
         .then(response => response.data);
 
@@ -41,7 +41,7 @@ export function auth() {
     }
 }
 
-export function logoutUser() {
+export const logoutUser = () => {
     const request = axios.get(`${USER_SERVER}/logout`)
         .then(response => response.data);
 
@@ -52,7 +52,7 @@ export function logoutUser() {
 }
 
 
-export function addToCart(_id) {
+export const addToCart => (_id) => {
     const request = axios.get(`${USER_SERVER}/addToCart?productId=${_id}`)
         .then(response => response.data);
 
@@ -64,7 +64,7 @@ export function addToCart(_id) {
 
 
 
-export function getCartItems(cartItems, userCart) {
+export const getCartItems = (cartItems, userCart) => {
     const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
         .then(response => {
 
@@ -92,7 +92,7 @@ export function getCartItems(cartItems, userCart) {
 
 
 
-export function removeCartItem(id) {
+export const removeCartItem = (id) => {
     const request = axios.get(`/api/users/removeFromCart?_id=${id}`)
         .then(response => {
 
@@ -113,7 +113,7 @@ export function removeCartItem(id) {
 }
 
 
-export function onSuccessBuy(data) {
+export const onSuccessBuy = (data) => {
 
     const request = axios.post(`${USER_SERVER}/successBuy`, data)
         .then(response => response.data);
