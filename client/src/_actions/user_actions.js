@@ -59,28 +59,20 @@ export const addToCart = async (_id) => {
 
 
 
-export const getCartItems = (cartItems, userCart) => {
-    const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
-        .then(response => {
-
-
-            //Make CartDetail inside Redux Store 
-            // We need to add quantity data to Product Information that come from Product Collection. 
-
-            userCart.forEach(cartItem => {
-                response.data.forEach((productDetail, i) => {
+export const getCartItems = async (cartItems, userCart) => {
+    const request = await axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
+    if (request.data) {
+        userCart.forEach(cartItem => {
+            request.data.forEach((productDetail, i) => {
                     if (cartItem.id === productDetail._id) {
                         response.data[i].quantity = cartItem.quantity;
                     }
-                })
-            })
-
-            return response.data;
-        });
+        })
+        }
 
     return {
         type: GET_CART_ITEMS_USER,
-        payload: request
+        payload: request.data
     }
 }
 
